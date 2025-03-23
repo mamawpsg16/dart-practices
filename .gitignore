@@ -1,0 +1,49 @@
+# Dart & Flutter specific ignores
+.dart_tool/
+.packages
+build/
+.pub/
+.pub-cache/
+.idea/
+*.iml
+
+# Flutter specific ignores
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-versions
+.metadata
+android/.gradle/
+android/key.properties
+android/app/key.jks
+android/local.properties
+ios/.symlinks/
+ios/Pods/
+ios/.generated/
+macos/.symlinks/
+macos/Pods/
+web/.dart_tool/
+linux/flutter/
+windows/flutter/
+windows/.dart_tool/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# IDE and editor specific ignores
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Node.js & Firebase (if using Firebase or Node.js backend)
+node_modules/
+functions/node_modules/
+firebase-debug.log
