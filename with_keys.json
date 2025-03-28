@@ -1,0 +1,27 @@
+{
+    "name": "John Doe",
+    "age": 30,
+    "email": "johndoe@example.com",
+    "address": {
+      "street": "123 Main St",
+      "city": "New York",
+      "zip": "10001"
+    },
+    "preferences": {
+      "notifications": true,
+      "theme": "dark"
+    },
+    "orders": [
+      {
+        "id": 101,
+        "total": 250.75,
+        "status": "shipped"
+      },
+      {
+        "id": 102,
+        "total": 99.99,
+        "status": "pending"
+      }
+    ]
+  }
+  

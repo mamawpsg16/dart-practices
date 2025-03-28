@@ -1,0 +1,2 @@
+TO MAKE DART DEBUG MODE TO MAKE ASSERT WORKS
+#dart run --enable-asserts filename

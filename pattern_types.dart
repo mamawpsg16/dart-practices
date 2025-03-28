@@ -139,4 +139,177 @@ void main() {
     default:
       print('User not found.');
   }
+
+  /** VARIABLE */
+  switch ((1, "2")) {
+    case (int a, String b):
+      print('named $a $b ');
+    case (var a, var b): 
+      print('$a $b');
+    default:
+      print('No match');
+  }
+
+  /** Identifier */
+  const c = 1;
+  switch (2) {
+    case c:
+      print('match $c');
+    default:
+      print('no match'); // Prints "no match".
+  }
+
+  /** PARENTHERISIZED */
+  String checkAccess((String role, bool isSubscribed) user) {
+    return switch (user) {
+      ('admin', _) => 'Full access',
+      ('moderator', true) || ('user', true) => 'Limited access',
+      ('moderator', false) || ('user', false) => 'No access',
+      _ => 'Unknown'
+    };
+  }
+
+  print(checkAccess(('admin', true)));     // Full access
+  print(checkAccess(('moderator', true))); // Limited access
+  print(checkAccess(('user', true)));      // Limited access
+  print(checkAccess(('moderator', false)));// No access
+  print(checkAccess(('user', false)));     // No access
+
+  /** Rest element */
+
+  var [a, b, ..., d, e] = [1, 2, 3, 4, 5, 6, 7];
+    // Prints "1 2 6 7".
+  print('$a $b $d $e');
+  var [f, g, ...rest, h] = [1, 2, 3, 4, 5, 6, 7];
+  print('$f $g $rest $h');
+
+
+  /** MAP */
+  final {'foo': int? foo} = {'foo': 42};  //ENSURE A FOO EXISTS IN THE MAP WITH NULLABLE INT AND ASSIGN TO foo VARIABLE
+  print(foo); // ✅ Output: 42
+  Map<String, dynamic> data = {};
+
+  switch (data) {
+    case {'foo': int? foo}:
+      print('Foo is $foo');
+    default:
+      print('Key "foo" not found.');
+  } 
+
+  if (data case {'foo': int? foo}) {
+    print('Foo is $foo');
+  } else {
+    print('Key "foo" not found.');
+  }
+
+  /** RECORD */
+  var (myString: foo1, myNumber: bar1) = (myString: 'string', myNumber: 1);
+
+  print(foo1); // ✅ Output: string
+  print(bar1); // ✅ Output: 1
+
+  var myRecord = (myString: 'stringv1', myNumber: 2);
+  
+  final (:myString, :int myNumber) = myRecord;  
+  
+  print(myString); // Output: string
+  print(myNumber); // Output: 1
+
+  var record1 = (name: "Alice", age: 25);
+
+  switch (record1) {
+    case (name: var n, age: var a):
+      print('Name: $n, Age: $a'); // ✅ Output: Name: Alice, Age: 25
+  }
+
+  var record2 = (name: "Bob", age: 30);
+
+  switch (record2) {
+    case (name: String n, age: int a):
+      print('Name: $n, Age: $a'); // ✅ Output: Name: Bob, Age: 30
+    default:
+      print('No match');
+  }
+
+  var record3 = (checked: "Valid", asserted: null);
+
+  switch (record3) {
+    case (checked: var c?, asserted: var a?): // `a!` ensures a non-null value
+    // case (checked: var c?, asserted: var a!): // `a!` ensures a non-null value
+      print('Checked: $c, Asserted: $a');
+    case (checked: var c?, asserted: null):
+      print('Checked: $c, but asserted is null'); // ✅ Output
+    default:
+      print('No match');
+  }
+
+  var record4 = ('Alice', 30);
+
+  switch (record4) {
+    case (String name, int age):
+      print('Name: $name, Age: $age'); // ✅ Output: Name: Alice, Age: 30
+  }
+
+  var record5 = (untyped: 42, typed: "Hello");
+
+  switch (record5) {
+    case (untyped: var u as int, typed: var t as String):
+      print('Integer: $u, String: $t'); // ✅ Output: Integer: 42, String: Hello
+    default:
+      print('No match');
+  }
+
+  /** OBJECT */
+  var shape = Rectangle(10, 20);
+
+  switch (shape) {
+    case Rectangle(width: var w, height: var h):
+      print('Width: $w, Height: $h'); // ✅ Output: Width: 10, Height: 20
+  }
+
+  //Using Object Patterns in var Destructuring
+  var rect = Rectangle(5, 15);
+
+  var Rectangle(:width, :height) = rect; // Destructuring with shorthand syntax
+
+  print('Width: $width, Height: $height'); // ✅ Output: Width: 5, Height: 15
+
+  Shape shape1 = Circle(7);
+  //Matching Subclasses
+  switch (shape1) {
+    case Circle(radius: var r):
+      print('Circle with radius: $r'); // ✅ Output: Circle with radius: 7
+    default:
+      print('Unknown shape');
+  }
+
+  /** WILDCARD */
+  var list = [1, 2, 3];
+  var [_, two, _] = list;
+  print(two); // ✅ Output: 2
+
+  var newRecord = ("Kevin", 30);
+  switch (newRecord) {
+    case (String _, int _):
+      print("First value is a string, second is an integer");
+      break;
+    default:
+      print("No match");
+  }
+
 }
+
+class Rectangle {
+  final double width;
+  final double height;
+
+  Rectangle(this.width, this.height);
+}
+
+class Shape {}
+
+class Circle extends Shape {
+  final double radius;
+  Circle(this.radius);
+}
+
